@@ -14,8 +14,4 @@ def main(df_data):
     df_data_features = df_data[features]
     predictions = predict_model(df_data_features, loaded_rfc)
     df_data["predictions"] = predictions
-    print(f'F1: {f1_score(df_data[target_col], predictions)}')
-    return df_data
-
-if __name__ == "__main__":
-    main()
+    return df_data, f1_score(df_data[target_col], predictions)

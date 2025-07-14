@@ -9,6 +9,8 @@ En este caso, el proyecto busca predecir si un viaje en taxi en Nueva York tuvo 
 
 En este proyecto se utilizan técnicas de procesamiento de datos, ingeniería de características y modelos de machine learning para lograr una clasificación efectiva.
 
+Por su parte, se incluye el archivo respuestas.ipynb con respuestas a las preguntas propuestas en la formulación de la tarea.
+
 ---
 
 ## 🛠 Tecnologías
@@ -16,10 +18,11 @@ En este proyecto se utilizan técnicas de procesamiento de datos, ingeniería de
 Lista de herramientas, librerías y versiones y lenguajes usados, por ejemplo:
 
 - Python 3.9+
-- pandas
-- scikit-learn
-- pyarrow
-- fastparquet
+- pandas==2.3.1
+- scikit-learn==1.7.0
+- pyarrow==20.0.0
+- fastparquet==2024.11.0
+- matplotlib==3.10.3
 
 ---
 
@@ -47,22 +50,9 @@ Lista de herramientas, librerías y versiones y lenguajes usados, por ejemplo:
 
 Ejemplo de ejecución de los scripts principales:
 
-Procesar datos:
+Se utiliza el código pipeline_evaluate_months con tres argumentos de entrada: Año de comienzo, mes y cantidad de meses a evaluar. En base a estos parámetros se descarga la información de su respectiva URL.
 ```bash
-python -m src.data.dataset
+python -m src.pipeline_evaluate_months 2020 2 10
 ```
 
-Generar características:
-```bash
-python -m src.features.build_features
-```
-
-Entrenar modelo:
-```bash
-python -m src.modeling.train
-```
-
-Realizar predicciones:
-```bash
-python -m src.modeling.predict
-```
+IMPORTANTE: El funcionamiento del código está sujeto a congruencia en la url y disponibilidad de información del año y meses solicitados.

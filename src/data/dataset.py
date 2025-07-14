@@ -1,5 +1,5 @@
 import pandas as pd
-from src.config import url_data_enero, path_raw_enero, path_preprocessed_enero, target_col, folder_raw, folder_processed
+from src.config import target_col, folder_raw, folder_processed
 
 
 def load_data(url):
@@ -7,12 +7,13 @@ def load_data(url):
 
 
 def preprocess_data(df, target_col):
-    df = df[df["fare_amount"] > 0].reset_index(drop=True)
-    df["tip_fraction"] = df["tip_amount"] / df["fare_amount"]
-    df[target_col] = df["tip_fraction"] > 0.2
-    df[target_col] = df[target_col].astype("float32").fillna(-1.0)
-    df[target_col] = df[target_col].astype("int32")
-    return df
+    df_copy = df.copy()
+    df_copy = df_copy[df_copy["fare_amount"] > 0].reset_index(drop=True)
+    df_copy["tip_fraction"] = df_copy["tip_amount"] / df_copy["fare_amount"]
+    df_copy[target_col] = df_copy["tip_fraction"] > 0.2
+    df_copy[target_col] = df_copy[target_col].astype("float32").fillna(-1.0)
+    df_copy[target_col] = df_copy[target_col].astype("int32")
+    return df_copy
 
 
 def main(url_data, save_parquet=False):
@@ -24,7 +25,3 @@ def main(url_data, save_parquet=False):
         df_data.to_parquet(path_raw, index=False)
         df_preprocessed.to_parquet(path_preprocessed, index=False)
     return df_preprocessed
-
-
-if __name__ == "__main__":
-    main()

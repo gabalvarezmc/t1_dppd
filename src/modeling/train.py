@@ -14,7 +14,3 @@ def main(df_data, bool_header=True):
     if bool_header:
         df_data = df_data.head(100000)
     train_and_save_model(df_data, features, target_col)
-
-
-if __name__ == "__main__":
-    main()
