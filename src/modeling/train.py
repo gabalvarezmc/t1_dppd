@@ -1,8 +1,7 @@
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import f1_score
 import joblib
-from ..config import features, target_col, path_enero_with_features, path_model
+from src.config import features, target_col, path_model
 
 
 def train_and_save_model(df, features, target_col):
@@ -11,9 +10,10 @@ def train_and_save_model(df, features, target_col):
     joblib.dump(rfc, path_model)
 
 
-def main():
-    df_enero = pd.read_parquet(path_enero_with_features)
-    train_and_save_model(df_enero, features, target_col)
+def main(df_data, bool_header=True):
+    if bool_header:
+        df_data = df_data.head(100000)
+    train_and_save_model(df_data, features, target_col)
 
 
 if __name__ == "__main__":

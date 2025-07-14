@@ -1,5 +1,5 @@
 import pandas as pd
-from src.config import path_preprocessed_enero, path_preprocessed_febrero, target_col, features, EPS, path_enero_with_features, path_febrero_with_features
+from src.config import target_col, features, EPS
 
 
 def add_features(df, features, eps, target_col):
@@ -16,15 +16,11 @@ def add_features(df, features, eps, target_col):
     return df.reset_index(drop=True)
 
 
-def main():
-    df_data_enero = pd.read_parquet(path_preprocessed_enero)
-    df_data_febrero = pd.read_parquet(path_preprocessed_febrero)
-
-    df_data_enero = add_features(df_data_enero, features, EPS, target_col)
-    df_data_febrero = add_features(df_data_febrero, features, EPS, target_col)
-
-    df_data_enero.to_parquet(path_enero_with_features, index=False)
-    df_data_febrero.to_parquet(path_febrero_with_features, index=False)
+def main(df_data, path_with_features=None, save_parquet=False):
+    df_data = add_features(df_data, features, EPS, target_col)
+    if save_parquet:
+        df_data.to_parquet(path_with_features, index=False)
+    return df_data
 
 
 if __name__ == "__main__":
