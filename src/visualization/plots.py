@@ -38,19 +38,7 @@ def plot_positive_counts_predicted(list_results_predictions):
     plt.xticks(rotation=45)
     plt.grid(axis='y')
     plt.savefig('plots/positive_counts_predicted_by_month.png')
-
-def plot_total_counts(list_results_predictions):
-    months = [result["month"] for result in list_results_predictions]
-    total_counts = [result["total_count"] for result in list_results_predictions]
-
-    plt.figure(figsize=(10, 5))
-    plt.bar(months, total_counts, color='green', alpha=0.7)
-    plt.title('Cantidad Total de Registros por Mes')
-    plt.xlabel('Mes')
-    plt.ylabel('Cantidad Total de Registros')
-    plt.xticks(rotation=45)
-    plt.grid(axis='y')
-    plt.savefig('plots/total_counts_by_month.png')
+    
 
 def main(list_results_predictions):
     plot_f1_scores(list_results_predictions)
